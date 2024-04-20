@@ -83,8 +83,8 @@ class SubgoalDiscovery():
 			return
 		distance = []
 		for member in self.outliers:
-			# distance.append( (member[0]-outlier[0])**2+(member[1]-outlier[1])**2 )
-			distance.append( (member-outlier)**2 )
+			distance.append( (member[0]-outlier[0])**2+(member[1]-outlier[1])**2 )
+			#distance.append( (member-outlier)**2 )
 		if min(distance) >= threshold:
 			self.outliers.append(outlier)
 			self.G = self.centroid_subgoals + self.outliers
@@ -108,8 +108,8 @@ class SubgoalDiscovery():
 			else:
 				distance = []
 				for member in self.doorways:
-					# distance.append( (member[0]-s[0])**2+(member[1]-s[1])**2 )
-					distance.append( (member-s)**2 )
+					distance.append( (member[0]-s[0])**2+(member[1]-s[1])**2 )
+					#distance.append( (member-s)**2 )
 				if min(distance) >= threshold:
 					self.doorways.append(s)
 					self.doorways.append(sp)
