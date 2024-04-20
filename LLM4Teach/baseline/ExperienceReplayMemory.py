@@ -20,8 +20,8 @@ class ExperienceReplayMemory():
 		a = experience[1]
 		r = experience[2]
 		sp = experience[3]
-		# new_X = np.array((s[0]/16,s[1]/16)).reshape(1,-1)
-		new_X = np.array(s/16).reshape(1,-1)
+		new_X = np.array((s[0]/16,s[1]/16)).reshape(1,-1)
+		# new_X = np.array(s/16).reshape(1,-1)
 		if self.X.size == 0:
 			self.X = new_X
 		else:
@@ -47,8 +47,8 @@ class ExperienceReplayMemory():
 			a = experience[1]
 			r = experience[2]
 			sp = experience[3]
-			# new_X = np.array((s[0]/16,s[1]/16,r/40,sp[0]/16,sp[1]/16)).reshape(1,-1)
-			new_X = np.array((s/16,r/40,sp/16)).reshape(1,-1)
+			new_X = np.array((s[0]/16,s[1]/16,r/40,sp[0]/16,sp[1]/16)).reshape(1,-1)
+			# new_X = np.array((s/16,r/40,sp/16)).reshape(1,-1)
 			if i == 0:
 				self.X = new_X
 			else:
