@@ -100,7 +100,8 @@ class PretrainController():
 				sp = self.env.agent_pos
 				Qp = self.controller.Q.compute_Qp(sp, g_id)
 				ap = self.epsilon_greedy(Qp)
-				if self.env.state_before_passing_doorway in g:
+				#if self.env.state_before_passing_doorway in g:
+				if done:
 					terminal = True
 					done_mask = 1
 					r_tilde = 1.0
@@ -213,7 +214,8 @@ class MetaControllerController():
 			sp,r,done,info = self.env.step(a)
 			self.R += r
 			self.done = done
-			if self.env.state_before_passing_doorway in g:
+			# if self.env.state_before_passing_doorway in g:
+			if done:
 				self.terminal = True
 			else:
 				self.terminal = False
