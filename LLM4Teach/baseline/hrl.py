@@ -1,4 +1,4 @@
-from Model import Model, MetaModel
+from baseline.Model import Model, MetaModel
 import numpy as np
 class Controller():
 	def __init__(self):
