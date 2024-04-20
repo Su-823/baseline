@@ -26,9 +26,11 @@ class RandomWalk():
 		print('#'*60)
 		for i in range(self.max_episodes):
 			s = self.env.reset()
+			s = self.env.agent_pos
 			for j in range(self.max_steps):			
 				a = self.env.action_space.sample()
 				sp, r, terminal, step_info = self.env.step(a)
+				sp = self.env.agent_pos
 				e = (s,a,r,sp)
 				self.experience_memory.push(e)
 				if r>0:
@@ -47,9 +49,11 @@ class RandomWalk():
 		print('#'*60)
 		for i in range(self.max_episodes):
 			s = self.env.reset()
+			s = self.env.agent_pos
 			for j in range(self.max_steps):			
 				a = self.env.action_space.sample()
 				sp, r, terminal, step_info = self.env.step(a)
+				sp = self.env.agent_pos
 				e = (s,a,r,sp)
 				self.subgoal_discovery.push_doorways(e)
 				if terminal:
@@ -88,10 +92,12 @@ class PretrainController():
 		g = self.subgoals[g_id]
 		for i in range(self.max_episodes):
 			s = self.env.reset()
+			s = self.env.agent_pos
 			for j in range(self.max_steps):	
 				Q = self.controller.Q.compute_Q(s,g_id)
 				a = self.epsilon_greedy(Q)
 				sp,r,done,info = self.env.step(a)
+				sp = self.env.agent_pos
 				Qp = self.controller.Q.compute_Qp(sp, g_id)
 				ap = self.epsilon_greedy(Qp)
 				if self.env.state_before_passing_doorway in g:
@@ -157,6 +163,7 @@ class MetaControllerController():
 		for i in range(self.max_episodes):
 			self.R = 0
 			self.s = self.env.reset()
+			self.s = self.env.agent_pos
 			self.done = False
 			self.t = 0
 			while not self.done:
@@ -248,11 +255,13 @@ class VanillaRL():
 		print('#'*60)
 		for i in range(self.max_episodes):
 			s = self.env.reset()
+			s = self.env.agent_pos
 			self.R = 0
 			for j in range(self.max_steps):	
 				Q = self.Q.compute_Q(s)
 				a = self.epsilon_greedy(Q)
 				sp,r,done,info = self.env.step(a)
+				sp = self.env.agent_pos
 				self.R += r
 				Qp = self.Q.compute_Qp(sp)
 				ap = self.epsilon_greedy(Qp)
